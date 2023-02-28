@@ -5,6 +5,12 @@ import os
 #Doesn't use any third party modules.
 #Made with Python 3.10.6
 #ver 1.0
+
+#To Do:
+#Add Events e.g sporting or academic events and individual and team events
+#points based on performance
+#possibility to enter for only one event
+
 #used for data that is read from json files
 teamdata = {
 
