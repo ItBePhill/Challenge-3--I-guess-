@@ -17,8 +17,7 @@ individuals = 0
 tori = ""
 teamamt =  0
 members = 1
-#jsonpath = "//lits.blackpool.ac.uk/Data/Student Homes/Active_Q1/289/30234289/Documents/Unit 4 Programming/Python/Challenge 3 (I guess)/"
-jsonpath = "D:/programing languages/Python/Challenge 3 (I guess)/"
+jsonpath = os.getcwd()+"/"
 #dictionaries for writing to team and indiv json files
 team = {
     "id" : 0,
