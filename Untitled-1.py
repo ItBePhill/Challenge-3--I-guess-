@@ -1,6 +1,10 @@
 import glob
 import json
 import os
+#github = https://github.com/ItBePhill/Challenge-3--I-guess-
+#Doesn't use any third party modules.
+#Made with Python 3.10.6
+#ver 1.0
 #used for data that is read from json files
 teamdata = {
 
