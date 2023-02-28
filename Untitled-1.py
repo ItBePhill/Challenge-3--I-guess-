@@ -12,7 +12,8 @@ individuals = 0
 tori = ""
 teamamt =  0
 members = 0
-jsonpath = "//lits.blackpool.ac.uk/Data/Student Homes/Active_Q1/289/30234289/Documents/Unit 4 Programming/Python/Challenge 3 (I guess)/"
+#jsonpath = "//lits.blackpool.ac.uk/Data/Student Homes/Active_Q1/289/30234289/Documents/Unit 4 Programming/Python/Challenge 3 (I guess)/"
+jsonpath = "D:/programing languages/Python/Challenge 3 (I guess)/"
 team = {
     "id" : 0,
     "name0": "",
@@ -46,24 +47,13 @@ def read():
             teams.append(i)
         else:
             indivs.append(i)
-    # for i in range(len(teams)):
-    #     idx = i
-    #     for j in range(i+1, len(teams)):
-    #         if os.path.getmtime(teams[i]) > os.path.getmtime(teams[idx]):
-    #             idx = j
-    #         teams[i], teams[idx] = teams[idx], teams[i]
-    # for i in range(len(indivs)):
-    #      idx = i
-    #      for j in range(i+1, len(indivs)):
-    #          if os.path.getmtime(indivs[i]) > os.path.getmtime(indivs[idx]):
-    #              idx = j
-    #          indivs[i], indivs[idx] = indivs[idx], indivs[i] 
-
+    teams.sort(key=lambda x: os.path.getctime(x))
+    teams.reverse()
+    indivs.sort(key=lambda x: os.path.getctime(x))
+    indivs.reverse()
     with open(teams[0], "r") as f:
-        print(teams[0])
         team = json.load(f)
     with open(indivs[0], "r") as f:
-        print(indivs[0])
         indiv = json.load(f)
     return team, indiv
 
@@ -71,7 +61,7 @@ def read():
 
         
         
-if os.path.exists(jsonpath+"team1.json") == False:
+if os.path.exists(jsonpath+"/team1.json") == False:
     teamjsonwrite()
 else:
     teamdata, indivdata = read()
