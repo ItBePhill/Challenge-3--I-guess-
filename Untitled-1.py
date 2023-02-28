@@ -12,7 +12,7 @@ teams = 0
 individuals = 0
 tori = ""
 teamamt =  0
-members = 0
+members = 1
 #jsonpath = "//lits.blackpool.ac.uk/Data/Student Homes/Active_Q1/289/30234289/Documents/Unit 4 Programming/Python/Challenge 3 (I guess)/"
 jsonpath = "D:/programing languages/Python/Challenge 3 (I guess)/"
 #dictionaries for writing to team and indiv json files
@@ -22,8 +22,7 @@ team = {
     "name1" : "",
     "name2" : "",
     "name3" : "",
-    "name4" : "",
-    "name5" : ""
+    "name4" : ""
 }
 individual = {
     "id" : 0,
@@ -63,7 +62,7 @@ def read():
     return team, indiv
 
 
-#Checks for Team file
+#Checks for Team file, if file doesn't exist makes default file with 0 members and with an id of 0
 if os.path.exists(jsonpath+"/team1.json") == False:
     teamjsonwrite()
 #Calls read() and assigns result to teamdata
@@ -71,12 +70,13 @@ else:
     teamdata, indivdata = read()
     teams = teamdata["id"]
     individuals = indivdata["id"]
-#Checks for Team file
+#Checks for Indiv file, if file doesn't exist makes default file with 0 members and with an id of 0
 
 if os.path.exists(jsonpath+"/indiv1.json") == False:
     indivjsonwrite()
-#Calls read() and assigns result to teamdata
+#Calls read() and assigns result to indivdata
 else:
+    #gets amount of teams and individuals from json files
     teamdata, indivdata = read()
     teams = teamdata["id"]
     individuals = indivdata["id"]
@@ -92,8 +92,8 @@ while tori != "t" and tori != "i":
         else:
             print("You may have maximum of 5 people in your team\nif you are done inputting names press enter to leave rest blank")
             teams+=1
-            while members < 5:
-                team["name"+str(members)] = input("Name "+str(members))
+            while members < 6:
+                team["name"+str(members - 1)] = input("Name: "+str(members)+"\n-")
                 members += 1
             team["id"] = teams
             teamjsonwrite()
