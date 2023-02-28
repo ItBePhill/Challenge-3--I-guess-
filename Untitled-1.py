@@ -43,7 +43,7 @@ def read():
     #gets a list of every json file in the jsonpath directory
     file_type = r'\*json'
     files = glob.glob(jsonpath + file_type)
-    #loops through each file from glob to check if it is a team or indiv file and append to respective directories
+    #loops through each file from glob to check if it is a team or indiv file and append to respective lists
     for i in files:
         if os.path.splitext(os.path.basename(i))[0].find("team") != -1:
             teams.append(i)
