@@ -1,6 +1,7 @@
 import glob
 import json
 import os
+#used for data that is read from json files
 teamdata = {
 
 }
@@ -14,6 +15,7 @@ teamamt =  0
 members = 0
 #jsonpath = "//lits.blackpool.ac.uk/Data/Student Homes/Active_Q1/289/30234289/Documents/Unit 4 Programming/Python/Challenge 3 (I guess)/"
 jsonpath = "D:/programing languages/Python/Challenge 3 (I guess)/"
+#dictionaries for writing to team and indiv json files
 team = {
     "id" : 0,
     "name0": "",
@@ -39,18 +41,21 @@ def indivjsonwrite():
 def read():
     teams = []
     indivs = []
-    folder_path = jsonpath
+    #gets a list of every json file in the jsonpath directory
     file_type = r'\*json'
-    files = glob.glob(folder_path + file_type)
+    files = glob.glob(jsonpath + file_type)
+    #loops through each file from glob to check if it is a team or indiv file and append to respective directories
     for i in files:
         if os.path.splitext(os.path.basename(i))[0].find("team") != -1:
             teams.append(i)
         else:
             indivs.append(i)
+    #sort file lists into order of time created and reverse order so it is descending
     teams.sort(key=lambda x: os.path.getctime(x))
     teams.reverse()
     indivs.sort(key=lambda x: os.path.getctime(x))
     indivs.reverse()
+    #read from the most recent file and return the result
     with open(teams[0], "r") as f:
         team = json.load(f)
     with open(indivs[0], "r") as f:
@@ -58,21 +63,26 @@ def read():
     return team, indiv
 
 
-
-        
-        
+#Checks for Team file
 if os.path.exists(jsonpath+"/team1.json") == False:
     teamjsonwrite()
+#Calls read() and assigns result to teamdata
 else:
     teamdata, indivdata = read()
     teams = teamdata["id"]
     individuals = indivdata["id"]
+#Checks for Team file
+
 if os.path.exists(jsonpath+"/indiv1.json") == False:
     indivjsonwrite()
+#Calls read() and assigns result to teamdata
 else:
     teamdata, indivdata = read()
     teams = teamdata["id"]
     individuals = indivdata["id"]
+ 
+
+#Menu Code
 while tori != "t" and tori != "i":
     tori = input("Teams: "+str(teams)+ "/4 Individuals: "+ str(individuals)+"/20 \nWill you be in a team or individual.\nT - team.\nI - Individual.\n-").lower()
     if(tori == "t"):
@@ -80,9 +90,9 @@ while tori != "t" and tori != "i":
             print("Sorry we already have enough teams, But you can enter as an individual.")
             tori = ""
         else:
-            print("Successfully entered!")
+            print("You may have maximum of 5 people in your team\nif you are done inputting names press enter to leave rest blank")
             teams+=1
-            while members < 6:
+            while members < 5:
                 team["name"+str(members)] = input("Name "+str(members))
                 members += 1
             team["id"] = teams
@@ -96,6 +106,7 @@ while tori != "t" and tori != "i":
             print("Successfully entered!")
             individuals+=1
             individual["id"] = individuals
+            individual["name"] = input("What is your name?\n-")
             indivjsonwrite()
     else:
         print("Error: Invalid Entry")
