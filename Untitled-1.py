@@ -1,7 +1,8 @@
 import glob
 import json
 import os
-#github = https://github.com/ItBePhill/Challenge-3--I-guess-
+import sys
+#https://github.com/ItBePhill/Challenge-3--I-guess-
 #Doesn't use any third party modules.
 #Made with Python 3.10.6
 #ver 1.0
@@ -37,6 +38,10 @@ individual = {
     "id" : 0,
     "name" : ""
 }
+def rest():
+    os.system('cls')
+    script_name = os.path.basename(__file__)
+    os.system(script_name)
 def teamjsonwrite():
     with open(jsonpath+"team"+str(teams)+".json", "w") as f:
         json.dump(team, f, indent=1)
@@ -93,33 +98,47 @@ else:
 
 #Menu Code
 while tori != "t" and tori != "i":
+    print("Main Menu----------------------------------------------------------------------------------------------")
     tori = input("Teams: "+str(teams)+ "/4 Individuals: "+ str(individuals)+"/20 \nWill you be in a team or individual.\nT - team.\nI - Individual.\n-").lower()
     if(tori == "t"):
-        if teams == 4:
+        if teams == 3:
             print("Sorry we already have enough teams, But you can enter as an individual.")
             tori = ""
         else:
-            print("You may have maximum of 5 people in your team\nif you are done inputting names Type B on the next name to finish(case sensitive)")
-            teams+=1
+            members = 0
+            print("Team-------------------------------------------------------------------------------------------")
+            print("You may have a maximum of 5 people in your team\nif you are done inputting names Type B on the next name to finish(case sensitive)")
             ans = ""
             while members < 6 and ans != "B":
                 ans = input("Name: "+str(members)+"\n-")
-                if ans != "B":
-                    team["name"+str(members - 1)] = ans
                 members += 1
-            team["id"] = teams
-            teamjsonwrite()
+                if ans == "B":
+                    if members < 4:
+                        ans2 = ""
+                        while ans2 != "y" and ans2 != "n":
+                            ans2 = input("It's better if you enter as an individual\nY = Back to Main Menu\nN = Continue\n-").lower()
+                        if ans2 == "y":
+                            os.startfile(__file__)
+                            sys.exit()
+
+                        if ans2 == "n":
+                            team["name" + str(members - 1)] == ans
+                            team["id"] = teams
+                            teamjsonwrite()
+                            teams+=1
+                        else:
+                            print("Error: Invalid Entry")
             
     elif(tori == "i"):
         if individuals == 20:
             print("Sorry we already have enough teams, But you can enter as an individual.")
             tori = ""
         else:
-            print("Successfully entered!")
             individuals+=1
             individual["id"] = individuals
             individual["name"] = input("What is your name?\n-")
             indivjsonwrite()
+            print("Successfully entered!")
     else:
         print("Error: Invalid Entry")
 
