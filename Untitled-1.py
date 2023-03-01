@@ -117,13 +117,15 @@ while tori != "t" and tori != "i":
                             
                         elif ans2 == "n":
                             print("n")
+                            teams+=1
                             team["name" + str(members - 1)] == ans
                             team["id"] = teams
                             teamjsonwrite()
-                            teams+=1
+                            
 
                         else:
                             print("invalid entry")
+                
                     
                         
             
