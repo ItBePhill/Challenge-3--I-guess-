@@ -23,9 +23,9 @@ indivdata = {
 teams = 0
 individuals = 0
 tori = ""
-teamamt =  0
 members = 1
-jsonpath = os.getcwd()+"/"
+jsonpath = os.path.dirname(__file__)+"\\"
+print(jsonpath)
 #dictionaries for writing to team and indiv json files
 team = {
     "id" : 0,
@@ -39,10 +39,6 @@ individual = {
     "id" : 0,
     "name" : ""
 }
-def rest():
-    os.system('cls')
-    script_name = os.path.basename(__file__)
-    os.system(script_name)
 def teamjsonwrite():
     with open(jsonpath+"team"+str(teams)+".json", "w") as f:
         json.dump(team, f, indent=1)
@@ -75,8 +71,6 @@ def read():
     with open(indivs[0], "r") as f:
         indiv = json.load(f)
     return team, indiv
-
-
 #Checks for Team file, if file doesn't exist makes default file with 0 members and with an id of 0
 if os.path.exists(jsonpath+"/team1.json") == False:
     teamjsonwrite()
@@ -119,16 +113,19 @@ while tori != "t" and tori != "i":
                         while ans2 != "y" and ans2 != "n":
                             ans2 = input("It's better if you enter as an individual\nY = Back to Main Menu\nN = Continue\n-").lower()
                         if ans2 == "y":
-                            os.startfile(__file__)
-                            sys.exit()
-
-                        if ans2 == "n":
+                            tori = ""
+                            
+                        elif ans2 == "n":
+                            print("n")
                             team["name" + str(members - 1)] == ans
                             team["id"] = teams
                             teamjsonwrite()
                             teams+=1
+
                         else:
-                            print("Error: Invalid Entry")
+                            print("invalid entry")
+                    
+                        
             
     elif(tori == "i"):
         if individuals == 20:
