@@ -7,7 +7,7 @@ import os
 #ver 1.0
 
 #To Do:
-#Add Events e.g sporting or academic events and individual and team events
+#Add Events e.g sporting or academic events and individual/team events
 #points based on performance
 #possibility to enter for only one event
 
@@ -99,10 +99,13 @@ while tori != "t" and tori != "i":
             print("Sorry we already have enough teams, But you can enter as an individual.")
             tori = ""
         else:
-            print("You may have maximum of 5 people in your team\nif you are done inputting names press enter to leave rest blank")
+            print("You may have maximum of 5 people in your team\nif you are done inputting names Type B on the next name to finish(case sensitive)")
             teams+=1
-            while members < 6:
-                team["name"+str(members - 1)] = input("Name: "+str(members)+"\n-")
+            ans = ""
+            while members < 6 and ans != "B":
+                ans = input("Name: "+str(members)+"\n-")
+                if ans != "B":
+                    team["name"+str(members - 1)] = ans
                 members += 1
             team["id"] = teams
             teamjsonwrite()
