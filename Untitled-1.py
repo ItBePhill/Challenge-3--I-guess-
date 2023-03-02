@@ -107,23 +107,7 @@ while tori != "t" and tori != "i":
             while members < 6 and ans != "B":
                 ans = input("Name: "+str(members)+"\n-")
                 members += 1
-                if ans == "B":
-                    if members < 4:
-                        ans2 = ""
-                        while ans2 != "y" and ans2 != "n":
-                            ans2 = input("It's better if you enter as an individual\nY = Back to Main Menu\nN = Continue\n-").lower()
-                        if ans2 == "y":
-                            tori = ""
-                            
-                        elif ans2 == "n":
-                            print("n")
-                            team["name" + str(members - 1)] == ans
-                            team["id"] = teams
-                            teamjsonwrite()
-                            teams+=1
-
-                        else:
-                            print("invalid entry")
+                
                     
                         
             
