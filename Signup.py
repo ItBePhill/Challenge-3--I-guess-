@@ -136,7 +136,7 @@ while tori != "t" and tori != "i":
                     team["id"] = teams
                     teamjsonwrite()
                     print("Successfully entered!")
-                    getpass("Your Teams ID is "+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
+                    getpass("Your teams ID is "+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
                     
 
             
