@@ -92,8 +92,8 @@ if os.path.exists(jsonpath+"team/"+"/team0.json") == False:
 #Calls read() and assigns result to teamdata
 else:
     teamdata, indivdata = read()
-    teams = teamdata["id"]
-    individuals = indivdata["id"]
+    teams = teamdata["id"][1]
+    individuals = indivdata["id"][1]
 #Checks for Indiv file, if file doesn't exist makes default file with 0 members and with an id of 0
 if os.path.exists(jsonpath+"indivs/"+"/indiv0.json") == False:
     indivjsonwrite()
@@ -101,8 +101,8 @@ if os.path.exists(jsonpath+"indivs/"+"/indiv0.json") == False:
 else:
     #gets amount of teams and individuals from json files
     teamdata, indivdata = read()
-    teams = teamdata["id"]
-    individuals = indivdata["id"]
+    teams = teamdata["id"][1]
+    individuals = indivdata["id"][1]
  
 
 #Menu Code
@@ -144,7 +144,7 @@ while tori != "t" and tori != "i":
                         getpass("Your Teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
                 if members == 6:
                     teams += 1
-                    team["id"] = "t"+str(teams)
+                    team["id"] = teams
                     teamjsonwrite()
                     print("Successfully entered!")
                     getpass("Your teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
@@ -165,8 +165,8 @@ while tori != "t" and tori != "i":
             ans = input("Input a name\nOr type B to quit to main menu\n-")
             if ans != "B" and ans != "b":
                 individual["name"] = ans
-                individuals+=1
-                individual["id"] = "i"+str(individuals)
+                individuals += 1
+                individual["id"] = individuals
                 indivjsonwrite()
                 print("Successfully entered!")
                 getpass("Your ID is i"+str(individuals)+" write it down somewhere as you will need it later, press enter to exit")
@@ -178,6 +178,9 @@ while tori != "t" and tori != "i":
         quit()
     else:
         print("Error: Invalid Entry")
+
+
+        
     
     
 
