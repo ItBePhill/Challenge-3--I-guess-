@@ -26,6 +26,7 @@ teams = 0
 individuals = 0
 tori = ""
 members = 1
+#path to the parent directory of 
 jsonpath = os.path.dirname(__file__)+"\\"
 print(jsonpath)
 #dictionaries for writing to team and indiv json files
@@ -43,6 +44,7 @@ individual = {
 }
 if os.path.exists(jsonpath+"teams\\") != True:
     os.mkdir(jsonpath+"teams\\")
+
 if os.path.exists(jsonpath+"indivs\\") != True:
     os.mkdir(jsonpath+"indivs\\")
 
@@ -50,6 +52,7 @@ def teamjsonwrite():
     with open(jsonpath+"teams\\"+"team"+str(teams)+".json", "w") as f:
         json.dump(team, f, indent=1)
         f.close
+
 def indivjsonwrite():
     with open(jsonpath+"indivs\\"+"indiv"+str(individuals)+".json", "w") as f:
         json.dump(individual, f, indent=1)
@@ -66,17 +69,23 @@ def read():
             teams.append(i)
         else:
             indivs.append(i)
+
+
     #sort file lists into order of time created and reverse order so it is descending
     teams.sort(key=lambda x: os.path.getctime(x))
     teams.reverse()
     indivs.sort(key=lambda x: os.path.getctime(x))
     indivs.reverse()
+
+
     #read from the most recent file and return the result
     with open(teams[0], "r") as f:
         team = json.load(f)
     with open(indivs[0], "r") as f:
         indiv = json.load(f)
     return team, indiv
+
+
 #Checks for Team file, if file doesn't exist makes default file with 0 members and with an id of 0
 if os.path.exists(jsonpath+"team/"+"/team0.json") == False:
     teamjsonwrite()
@@ -99,15 +108,17 @@ else:
 #Menu Code
 while tori != "t" and tori != "i":
     print("Main Menu----------------------------------------------------------------------------------------------")
-    tori = input("Teams: "+str(teams)+ "/4 Individuals: "+ str(individuals)+"/20 \nWill you be in a team or individual.\nT - Team.\nI - Individual.\n-").lower()
+    tori = input("Teams: "+str(teams)+ "/4 Individuals: "+ str(individuals)+"/20 \nWill you be in a team or individual.\nT - Team.\nI - Individual.\nB - Close\n-").lower()
+    print("")
     #Team
     if(tori == "t"):
         if teams == 4:
             print("Sorry we already have enough teams, But you can enter as an individual.")
             tori = ""
+            print("")
         else:
             members = 1
-            print("Team-------------------------------------------------------------------------------------------")
+            print("Enter as a Team----------------------------------------------------------------------------------------------------")
             print("You may have a maximum of 5 people in your team\nif you are done inputting names Type B on the next name to finish")
             ans = ""
             while members < 6 and ans != "B" and ans != "b":
@@ -116,7 +127,6 @@ while tori != "t" and tori != "i":
                     members+=1
                     team["name"+str(members-2)] = ans
                     print(team)
-
                 else:
                     if members < 2:
                         Con = ""
@@ -125,18 +135,20 @@ while tori != "t" and tori != "i":
                             if Con == "n":
                                 tori = ""
                                 members = 1
+                                print("")
                     elif members >= 2:
                         teams += 1
-                        team["id"] = teams
+                        team["id"] = "t"+str(teams)
                         teamjsonwrite()
                         print("Successfully entered!")
-                        getpass("Your Teams ID is "+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
+                        getpass("Your Teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
                 if members == 6:
                     teams += 1
-                    team["id"] = teams
+                    team["id"] = "t"+str(teams)
                     teamjsonwrite()
                     print("Successfully entered!")
-                    getpass("Your teams ID is "+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
+                    getpass("Your teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
+            print("-------------------------------------------------------------------------------------------------------")
                     
 
             
@@ -144,19 +156,29 @@ while tori != "t" and tori != "i":
                 
     #Individual
     elif(tori == "i"):
+        ans = ""
+        print("Enter as  an Individual---------------------------------------------------------------------------------------------")
         if individuals == 20:
             print("Sorry we already have enough teams, But you can enter as an individual.")
             tori = ""
         else:
-            individuals+=1
-            individual["id"] = individuals
-            individual["name"] = input("What is your name?\n-")
-            indivjsonwrite()
-            print("Successfully entered!")
-            getpass("Your ID is "+str(individuals)+" write it down somewhere as you will need it later, press enter to exit")
+            ans = input("Input a name\nOr type B to quit to main menu\n-")
+            if ans != "B" and ans != "b":
+                individual["name"] = ans
+                individuals+=1
+                individual["id"] = "i"+str(individuals)
+                indivjsonwrite()
+                print("Successfully entered!")
+                getpass("Your ID is i"+str(individuals)+" write it down somewhere as you will need it later, press enter to exit")
+                print("-------------------------------------------------------------------------------------------------------")
+            else:
+                tori = ""
+                print("")
+    elif(tori == "b"):
+        quit()
     else:
         print("Error: Invalid Entry")
-
+    
     
 
 
