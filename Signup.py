@@ -2,7 +2,6 @@ import glob
 import json
 import os
 import tkinter as tk
-import Events
 #COMMIT
 #https://github.com/ItBePhill/Challenge-3--I-guess-
 #Only uses one third party module (tkinter) for future hopefully GUI
@@ -41,12 +40,17 @@ individual = {
     "id" : 0,
     "name" : ""
 }
+if os.path.exists(jsonpath+"teams\\") != True:
+    os.mkdir(jsonpath+"teams\\")
+if os.path.exists(jsonpath+"indivs\\") != True:
+    os.mkdir(jsonpath+"indivs\\")
+
 def teamjsonwrite():
-    with open(jsonpath+"team"+str(teams)+".json", "w") as f:
+    with open(jsonpath+"teams\\"+"team"+str(teams)+".json", "w") as f:
         json.dump(team, f, indent=1)
         f.close
 def indivjsonwrite():
-    with open(jsonpath+"indiv"+str(individuals)+".json", "w") as f:
+    with open(jsonpath+"indivs\\"+"indiv"+str(individuals)+".json", "w") as f:
         json.dump(individual, f, indent=1)
         f.close
 
@@ -54,8 +58,9 @@ def read():
     teams = []
     indivs = []
     #gets a list of every json file in the jsonpath directory
-    file_type = r'\*json'
-    files = glob.glob(jsonpath + file_type)
+    file_type = r'**\*.json'
+    files = glob.glob(jsonpath + file_type, recursive= True)
+    print(files)
     #loops through each file from glob to check if it is a team or indiv file and append to respective lists
     for i in files:
         if os.path.splitext(os.path.basename(i))[0].find("team") != -1:
