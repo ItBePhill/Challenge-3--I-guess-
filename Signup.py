@@ -58,9 +58,7 @@ def read():
     teams = []
     indivs = []
     #gets a list of every json file in the jsonpath directory
-    file_type = r'**\*.json'
-    files = glob.glob(jsonpath + file_type, recursive= True)
-    print(files)
+    files = glob.glob(jsonpath + r"**\*.json", recursive= True)
     #loops through each file from glob to check if it is a team or indiv file and append to respective lists
     for i in files:
         if os.path.splitext(os.path.basename(i))[0].find("team") != -1:
@@ -79,7 +77,7 @@ def read():
         indiv = json.load(f)
     return team, indiv
 #Checks for Team file, if file doesn't exist makes default file with 0 members and with an id of 0
-if os.path.exists(jsonpath+"/team1.json") == False:
+if os.path.exists(jsonpath+"team/"+"/team0.json") == False:
     teamjsonwrite()
 #Calls read() and assigns result to teamdata
 else:
@@ -87,8 +85,7 @@ else:
     teams = teamdata["id"]
     individuals = indivdata["id"]
 #Checks for Indiv file, if file doesn't exist makes default file with 0 members and with an id of 0
-
-if os.path.exists(jsonpath+"/indiv1.json") == False:
+if os.path.exists(jsonpath+"indivs/"+"/indiv0.json") == False:
     indivjsonwrite()
 #Calls read() and assigns result to indivdata
 else:
