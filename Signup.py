@@ -2,6 +2,7 @@ import glob
 import json
 import os
 import tkinter as tk
+import Events
 #COMMIT
 #https://github.com/ItBePhill/Challenge-3--I-guess-
 #Only uses one third party module (tkinter) for future hopefully GUI
