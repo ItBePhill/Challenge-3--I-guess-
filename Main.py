@@ -1,12 +1,13 @@
 import glob
 import json
 import os
-import sys
+import tkinter as tk
 #COMMIT
 #https://github.com/ItBePhill/Challenge-3--I-guess-
-#Doesn't use any third party modules.
+#Only uses one third party module (tkinter) for future hopefully GUI
+#But isn't used at all right now
 #Made with Python 3.10.6
-#ver 1.0
+#Added build folder because I am planning to convert it to an exe with auto-py-to-exe so that can be run without dependencies
 
 #To Do:
 #Add Events e.g sporting or academic events and individual/team events
@@ -107,24 +108,6 @@ while tori != "t" and tori != "i":
             while members < 6 and ans != "B":
                 ans = input("Name: "+str(members)+"\n-")
                 members += 1
-                if ans == "B":
-                    if members < 4:
-                        ans2 = ""
-                        while ans2 != "y" and ans2 != "n":
-                            ans2 = input("It's better if you enter as an individual\nY = Back to Main Menu\nN = Continue\n-").lower()
-                        if ans2 == "y":
-                            tori = ""
-                            
-                        elif ans2 == "n":
-                            print("n")
-                            teams+=1
-                            team["name" + str(members - 1)] == ans
-                            team["id"] = teams
-                            teamjsonwrite()
-                            
-
-                        else:
-                            print("invalid entry")
                 
                     
                         
