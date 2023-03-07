@@ -2,6 +2,7 @@ import glob
 import json
 import os
 import tkinter as tk
+from getpass import getpass
 #COMMIT
 #https://github.com/ItBePhill/Challenge-3--I-guess-
 #Only uses one third party module (tkinter) for future hopefully GUI
@@ -128,10 +129,15 @@ while tori != "t" and tori != "i":
                         teams += 1
                         team["id"] = teams
                         teamjsonwrite()
+                        print("Successfully entered!")
+                        getpass("Your Teams ID is "+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
                 if members == 6:
                     teams += 1
                     team["id"] = teams
                     teamjsonwrite()
+                    print("Successfully entered!")
+                    getpass("Your Teams ID is "+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
+                    
 
             
                                 
@@ -147,6 +153,7 @@ while tori != "t" and tori != "i":
             individual["name"] = input("What is your name?\n-")
             indivjsonwrite()
             print("Successfully entered!")
+            getpass("Your ID is "+str(individuals)+" write it down somewhere as you will need it later, press enter to exit")
     else:
         print("Error: Invalid Entry")
 
