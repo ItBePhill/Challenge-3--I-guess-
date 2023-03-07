@@ -95,23 +95,45 @@ else:
 #Menu Code
 while tori != "t" and tori != "i":
     print("Main Menu----------------------------------------------------------------------------------------------")
-    tori = input("Teams: "+str(teams)+ "/4 Individuals: "+ str(individuals)+"/20 \nWill you be in a team or individual.\nT - team.\nI - Individual.\n-").lower()
+    tori = input("Teams: "+str(teams)+ "/4 Individuals: "+ str(individuals)+"/20 \nWill you be in a team or individual.\nT - Team.\nI - Individual.\n-").lower()
+    #Team
     if(tori == "t"):
-        if teams == 3:
+        if teams == 4:
             print("Sorry we already have enough teams, But you can enter as an individual.")
             tori = ""
         else:
-            members = 0
+            members = 1
             print("Team-------------------------------------------------------------------------------------------")
-            print("You may have a maximum of 5 people in your team\nif you are done inputting names Type B on the next name to finish(case sensitive)")
+            print("You may have a maximum of 5 people in your team\nif you are done inputting names Type B on the next name to finish")
             ans = ""
-            while members < 6 and ans != "B":
+            while members < 6 and ans != "B" and ans != "b":
                 ans = input("Name: "+str(members)+"\n-")
-                members += 1
-                
-                    
-                        
+                if ans != "B" and ans != "b":
+                    members+=1
+                    team["name"+str(members-2)] = ans
+                    print(team)
+
+                else:
+                    if members < 2:
+                        Con = ""
+                        while Con != "y" and Con != "n":
+                            Con = input("Are you sure you want to continue, It will be better for you to enter as an individual\nY= Continue\nN= Return to main menu\n-").lower()
+                            if Con == "n":
+                                tori = ""
+                                members = 1
+                    elif members >= 2:
+                        teams += 1
+                        team["id"] = teams
+                        teamjsonwrite()
+                if members == 6:
+                    teams += 1
+                    team["id"] = teams
+                    teamjsonwrite()
+
             
+                                
+                
+    #Individual
     elif(tori == "i"):
         if individuals == 20:
             print("Sorry we already have enough teams, But you can enter as an individual.")
