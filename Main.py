@@ -5,6 +5,7 @@ import tkinter as tk
 #COMMIT
 #https://github.com/ItBePhill/Challenge-3--I-guess-
 #Only uses one third party module (tkinter) for future hopefully GUI
+#But isn't used at all right now
 #Made with Python 3.10.6
 
 #To Do:
