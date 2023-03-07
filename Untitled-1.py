@@ -1,12 +1,11 @@
 import glob
 import json
 import os
-import sys
+import tkinter as tk
 #COMMIT
 #https://github.com/ItBePhill/Challenge-3--I-guess-
-#Doesn't use any third party modules.
+#Only uses one third party module (tkinter) for future hopefully GUI
 #Made with Python 3.10.6
-#ver 1.0
 
 #To Do:
 #Add Events e.g sporting or academic events and individual/team events
