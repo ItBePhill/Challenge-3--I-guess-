@@ -7,6 +7,7 @@ import tkinter as tk
 #Only uses one third party module (tkinter) for future hopefully GUI
 #But isn't used at all right now
 #Made with Python 3.10.6
+#Added build folder because I am planning to convert it to an exe with auto-py-to-exe so that can be run without dependencies
 
 #To Do:
 #Add Events e.g sporting or academic events and individual/team events
