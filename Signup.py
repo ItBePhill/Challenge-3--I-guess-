@@ -3,8 +3,6 @@ import json
 import os
 import tkinter as tk
 from getpass import getpass
-import subprocess
-#COMMIT
 #https://github.com/ItBePhill/Challenge-3--I-guess-
 #Only uses one third party module (tkinter) for future hopefully GUI
 #But isn't used at all right now
@@ -125,7 +123,7 @@ while tori != "t" and tori != "i":
                     team["name"+str(members-2)] = ans
                     print(team)
                 else:
-                    if members < 2:
+                    if members < 3:
                         Con = ""
                         while Con != "y" and Con != "n":
                             Con = input("Are you sure you want to continue, It will be better for you to enter as an individual\nY= Continue\nN= Return to main menu\n-").lower()
@@ -133,18 +131,56 @@ while tori != "t" and tori != "i":
                                 tori = ""
                                 members = 1
                                 print("")
+                            else:
+                                teams += 1
+                                team["id"] = "t"+str(teams)
+                                teamjsonwrite()
+                                print("Successfully entered!")
+                                getpass("Your Teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
+                                con = ""
+                                while con != "y" and con != "n":
+                                    con = input("Would you like to continue to the Events?\nY = Yes\nN = No").lower()
+                                    if con != "y" and con != "n":
+                                        print("Error: Invalid Entry")
+                                    else:
+                                        if con == "y":
+                                            import Events
+                                        else:
+                                            quit()
+                                
                     elif members >= 2:
                         teams += 1
                         team["id"] = "t"+str(teams)
                         teamjsonwrite()
                         print("Successfully entered!")
                         getpass("Your Teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
+                        con = ""
+                        while con != "y" and con != "n":
+                            con = input("Would you like to continue to the Events?\nY = Yes\nN = No").lower()
+                            if con != "y" and con != "n":
+                                print("Error: Invalid Entry")
+                            else:
+                                if con == "y":
+                                    import Events
+                                else:
+                                    quit()
                 if members == 6:
                     teams += 1
-                    team["id"] = teams
+                    team["id"] = "t"+str(teams)
                     teamjsonwrite()
                     print("Successfully entered!")
                     getpass("Your teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
+                    while con != "y" and con != "n":
+                        con = input("Would you like to continue to the Events?\nY = Yes\nN = No").lower()
+                        if con != "y" and con != "n":
+                            print("Error: Invalid Entry")
+                        else:
+                            if con == "y":
+                                import Events
+            
+                            else:
+                               quit()
+                    
             print("-------------------------------------------------------------------------------------------------------")
                     
 
@@ -186,6 +222,7 @@ while tori != "t" and tori != "i":
         quit()
     else:
         print("Error: Invalid Entry")
+        
 
 
         

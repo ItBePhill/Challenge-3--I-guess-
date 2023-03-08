@@ -6,7 +6,7 @@ files = glob.glob(jsonpath + r"**\*.json", recursive= True)
 ans = "  "
 for i in files:
     print(os.path.basename(i))
-if len(files) < 1:
+if len(files) < 3:
     print("Error: No Team or Individual Files")
 else:
     while ans[0] != "i" and ans[0] != "t":
@@ -14,20 +14,15 @@ else:
         if ans[0] != "i" and ans[0] != "t":
             print("Error: Invalid ID")
 
+
         elif ans[0] == "t":
             for i in files:
                 if os.path.basename(i).find(str(ans[1])) != -1 and os.path.basename(i).find("team") != -1:
                     print(os.path.basename(i))
                     break
-                else:
-                    print("Invalid ID")
-                    continue
 
         elif ans[0] == "i":
             for i in files:
                 if os.path.basename(i).find(str(ans[1])) != -1 and os.path.basename(i).find("indiv") != -1:
                     print(os.path.basename(i))
                     break
-                else:
-                    print("Invalid ID")
-                    continue
