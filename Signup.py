@@ -3,6 +3,7 @@ import json
 import os
 import tkinter as tk
 from getpass import getpass
+import subprocess
 #COMMIT
 #https://github.com/ItBePhill/Challenge-3--I-guess-
 #Only uses one third party module (tkinter) for future hopefully GUI
@@ -31,7 +32,7 @@ jsonpath = os.path.dirname(__file__)+"\\"
 print(jsonpath)
 #dictionaries for writing to team and indiv json files
 team = {
-    "id" : 0,
+    "id" : "n0",
     "name0": "",
     "name1" : "",
     "name2" : "",
@@ -39,7 +40,7 @@ team = {
     "name4" : ""
 }
 individual = {
-    "id" : 0,
+    "id" : "n0",
     "name" : ""
 }
 if os.path.exists(jsonpath+"teams\\") != True:
@@ -69,15 +70,11 @@ def read():
             teams.append(i)
         else:
             indivs.append(i)
-
-
     #sort file lists into order of time created and reverse order so it is descending
     teams.sort(key=lambda x: os.path.getctime(x))
     teams.reverse()
     indivs.sort(key=lambda x: os.path.getctime(x))
     indivs.reverse()
-
-
     #read from the most recent file and return the result
     with open(teams[0], "r") as f:
         team = json.load(f)
@@ -92,8 +89,8 @@ if os.path.exists(jsonpath+"team/"+"/team0.json") == False:
 #Calls read() and assigns result to teamdata
 else:
     teamdata, indivdata = read()
-    teams = teamdata["id"][1]
-    individuals = indivdata["id"][1]
+    teams = int(str(teamdata["id"])[1])
+    individuals = int(str(indivdata["id"])[1])
 #Checks for Indiv file, if file doesn't exist makes default file with 0 members and with an id of 0
 if os.path.exists(jsonpath+"indivs/"+"/indiv0.json") == False:
     indivjsonwrite()
@@ -101,8 +98,8 @@ if os.path.exists(jsonpath+"indivs/"+"/indiv0.json") == False:
 else:
     #gets amount of teams and individuals from json files
     teamdata, indivdata = read()
-    teams = teamdata["id"][1]
-    individuals = indivdata["id"][1]
+    teams = int(str(teamdata["id"])[1])
+    individuals = int(str(indivdata["id"])[1])
  
 
 #Menu Code
@@ -165,12 +162,23 @@ while tori != "t" and tori != "i":
             ans = input("Input a name\nOr type B to quit to main menu\n-")
             if ans != "B" and ans != "b":
                 individual["name"] = ans
+                print(individuals)
                 individuals += 1
-                individual["id"] = individuals
+                individual["id"] = "i"+str(individuals)
                 indivjsonwrite()
                 print("Successfully entered!")
                 getpass("Your ID is i"+str(individuals)+" write it down somewhere as you will need it later, press enter to exit")
                 print("-------------------------------------------------------------------------------------------------------")
+                con = ""
+                while con != "y" and con != "n":
+                    con = input("Would you like to continue to the Events?\nY = Yes\nN = No").lower()
+                    if con != "y" and con != "n":
+                        print("Error: Invalid Entry")
+                    else:
+                        if con == "y":
+                            import Events
+                        else:
+                            quit()
             else:
                 tori = ""
                 print("")
