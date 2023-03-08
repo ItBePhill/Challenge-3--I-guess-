@@ -1,1 +1,1 @@
-Run signup first as it will open events on it's own.
+Run Signup.py first as it will open Events.py on it's own.
