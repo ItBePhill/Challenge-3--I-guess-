@@ -170,6 +170,7 @@ while tori != "t" and tori != "i":
                     teamjsonwrite()
                     print("Successfully entered!")
                     getpass("Your teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
+                    con = ""
                     while con != "y" and con != "n":
                         con = input("Would you like to continue to the Events?\nY = Yes\nN = No").lower()
                         if con != "y" and con != "n":
@@ -181,7 +182,6 @@ while tori != "t" and tori != "i":
                             else:
                                quit()
                     
-            print("-------------------------------------------------------------------------------------------------------")
                     
 
             
@@ -204,7 +204,7 @@ while tori != "t" and tori != "i":
                 indivjsonwrite()
                 print("Successfully entered!")
                 getpass("Your ID is i"+str(individuals)+" write it down somewhere as you will need it later, press enter to exit")
-                print("-------------------------------------------------------------------------------------------------------")
+
                 con = ""
                 while con != "y" and con != "n":
                     con = input("Would you like to continue to the Events?\nY = Yes\nN = No").lower()
