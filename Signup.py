@@ -5,6 +5,7 @@ import tkinter as tk
 from getpass import getpass
 import subprocess
 import sys
+color = False
 #https://github.com/ItBePhill/Challenge-3--I-guess-
 #Only uses one third party module (tkinter) for future hopefully GUI
 #But isn't used at all right now
@@ -101,17 +102,23 @@ else:
     teams = int(str(teamdata["id"])[1])
     individuals = int(str(indivdata["id"])[1])
 #for installing required package(colorama)------------------------------------------------------------
-inst = ""
-while inst != "y" and inst != "n":
-    inst = input("Would you like to install required package(colorama)\nY = yes\nN = no\n-").lower()
-    if inst == "y":
-        subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'colorama'])
-        print("")
-    else:
-        print("")
-        break
-    if inst != "y" and inst != "n":
-        print("Error: Invalid Entry")
+try:
+    import colorama
+except ImportError:
+    inst = ""
+    while inst != "y" and inst != "n":
+        inst = input("Would you like to install required package(colorama)\nY = yes\nN = no\n-").lower()
+        if inst != "y" and inst != "n":
+            print("Error: Invalid Entry")
+        elif inst == "y":
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'colorama'])
+            print("")
+
+        elif inst == "n":
+            print("")
+            break
+        pass
+
 #------------------------------------------------------------------------------------------------------------------
 #Menu Code
 while tori != "t" and tori != "i":

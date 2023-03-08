@@ -1,0 +1,1 @@
+Run signup first as it will open events on it's own.

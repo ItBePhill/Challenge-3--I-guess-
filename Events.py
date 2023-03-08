@@ -1,9 +1,27 @@
 import json
 import glob
 import os
+import sys
+import subprocess
 jsonpath = os.path.dirname(__file__)+"\\"
 files = glob.glob(jsonpath + r"**\*.json", recursive= True)
 ans = "  "
+try:
+    import colorama
+except ImportError as e:
+    inst = ""
+    while inst != "y" and inst != "n":
+        inst = input("Would you like to install required package(colorama)\nY = yes\nN = no\n-").lower()
+        if inst == "y":
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'colorama'])
+            print("")
+
+        else:
+            print("")
+            break
+        if inst != "y" and inst != "n":
+            print("Error: Invalid Entry")
+        pass
 for i in files:
     print(os.path.basename(i))
 if len(files) < 3:
