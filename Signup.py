@@ -3,6 +3,8 @@ import json
 import os
 import tkinter as tk
 from getpass import getpass
+import subprocess
+import sys
 #https://github.com/ItBePhill/Challenge-3--I-guess-
 #Only uses one third party module (tkinter) for future hopefully GUI
 #But isn't used at all right now
@@ -98,8 +100,19 @@ else:
     teamdata, indivdata = read()
     teams = int(str(teamdata["id"])[1])
     individuals = int(str(indivdata["id"])[1])
- 
-
+#for installing required package(colorama)------------------------------------------------------------
+inst = ""
+while inst != "y" and inst != "n":
+    inst = input("Would you like to install required package(colorama)\nY = yes\nN = no\n-").lower()
+    if inst == "y":
+        subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'colorama'])
+        print("")
+    else:
+        print("")
+        break
+    if inst != "y" and inst != "n":
+        print("Error: Invalid Entry")
+#------------------------------------------------------------------------------------------------------------------
 #Menu Code
 while tori != "t" and tori != "i":
     print("Main Menu----------------------------------------------------------------------------------------------")
@@ -139,7 +152,7 @@ while tori != "t" and tori != "i":
                                 getpass("Your Teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
                                 con = ""
                                 while con != "y" and con != "n":
-                                    con = input("Would you like to continue to the Events?\nY = Yes\nN = No").lower()
+                                    con = input("Would you like to continue to the Events?\nY = Yes\nN = No\n-").lower()
                                     if con != "y" and con != "n":
                                         print("Error: Invalid Entry")
                                     else:
@@ -156,7 +169,7 @@ while tori != "t" and tori != "i":
                         getpass("Your Teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
                         con = ""
                         while con != "y" and con != "n":
-                            con = input("Would you like to continue to the Events?\nY = Yes\nN = No").lower()
+                            con = input("Would you like to continue to the Events?\nY = Yes\nN = No\n-").lower()
                             if con != "y" and con != "n":
                                 print("Error: Invalid Entry")
                             else:
@@ -172,7 +185,7 @@ while tori != "t" and tori != "i":
                     getpass("Your teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
                     con = ""
                     while con != "y" and con != "n":
-                        con = input("Would you like to continue to the Events?\nY = Yes\nN = No").lower()
+                        con = input("Would you like to continue to the Events?\nY = Yes\nN = No\n-").lower()
                         if con != "y" and con != "n":
                             print("Error: Invalid Entry")
                         else:
@@ -207,7 +220,7 @@ while tori != "t" and tori != "i":
 
                 con = ""
                 while con != "y" and con != "n":
-                    con = input("Would you like to continue to the Events?\nY = Yes\nN = No").lower()
+                    con = input("Would you like to continue to the Events?\nY = Yes\nN = No\n-").lower()
                     if con != "y" and con != "n":
                         print("Error: Invalid Entry")
                     else:
