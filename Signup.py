@@ -7,10 +7,6 @@ import subprocess
 import sys
 color = False
 #https://github.com/ItBePhill/Challenge-3--I-guess-
-#Only uses one third party module (tkinter) for future hopefully GUI
-#But isn't used at all right now
-#Made with Python 3.10.6
-#Added build folder because I am planning to convert it to an exe with auto-py-to-exe so that can be run without dependencies
 
 #To Do:
 #Add Events e.g sporting or academic events and individual/team events
@@ -101,15 +97,19 @@ else:
     teamdata, indivdata = read()
     teams = int(str(teamdata["id"])[1])
     individuals = int(str(indivdata["id"])[1])
-#for installing required package(colorama)------------------------------------------------------------
+#for installing required package(coloramaorama)------------------------------------------------------------
 try:
     import colorama
 except ImportError:
     inst = ""
     while inst != "y" and inst != "n":
-        inst = input("Would you like to install required package(colorama)\nY = yes\nN = no\n-").lower()
-        if inst != "y" and inst != "n":
+        inst = input("Would you like to install required package(coloramaorama)\nY = yes\nN = no(program may not work as intended)\nyn = install but uninstall when program is closed(you will have to reinstall when running Events)\n-").lower()
+        if inst != "y" and inst != "n" and inst != "yn":
             print("Error: Invalid Entry")
+        elif inst == "yn":
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'colorama'])
+            print("")
+            color = True
         elif inst == "y":
             subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'colorama'])
             print("")
@@ -118,26 +118,28 @@ except ImportError:
             print("")
             break
         pass
-
+def uninstall():
+    if coloramaour == True:
+        subprocess.check_call([sys.executable, '-m', 'pip', 'uninstall', 'colorama'])
 #------------------------------------------------------------------------------------------------------------------
 #Menu Code
 while tori != "t" and tori != "i":
-    print("Main Menu----------------------------------------------------------------------------------------------")
-    tori = input("Teams: "+str(teams)+ "/4 Individuals: "+ str(individuals)+"/20 \nWill you be in a team or individual.\nT - Team.\nI - Individual.\nB - Close\n-").lower()
+    print(colorama.Fore.WHITE+"Main Menu----------------------------------------------------------------------------------------------")
+    tori = input(colorama.Fore.WHITE+"Teams: "+str(teams)+ "/4 Individuals: "+ str(individuals)+"/20 \nWill you be in a team or individual.\nT - Team.\nI - Individual.\nB - Close\n-").lower()
     print("")
     #Team
     if(tori == "t"):
         if teams == 4:
-            print("Sorry we already have enough teams, But you can enter as an individual.")
+            print(colorama.Fore.RED+"Sorry we already have enough teams, But you can enter as an individual.")
             tori = ""
-            print("")
+            print(colorama.Fore.WHITE+"")
         else:
             members = 1
-            print("Enter as a Team----------------------------------------------------------------------------------------------------")
-            print("You may have a maximum of 5 people in your team\nif you are done inputting names Type B on the next name to finish")
+            print(colorama.Fore.WHITE+"Enter as a Team----------------------------------------------------------------------------------------------------")
+            print(colorama.Fore.WHITE+"You may have a maximum of 5 people in your team\nif you are done inputting names Type B on the next name to finish")
             ans = ""
             while members < 6 and ans != "B" and ans != "b":
-                ans = input("Name: "+str(members)+"\n-")
+                ans = input(colorama.Fore.WHITE+"Name: "+str(members)+"\n-")
                 if ans != "B" and ans != "b":
                     members+=1
                     team["name"+str(members-2)] = ans
@@ -146,7 +148,7 @@ while tori != "t" and tori != "i":
                     if members < 3:
                         Con = ""
                         while Con != "y" and Con != "n":
-                            Con = input("Are you sure you want to continue, It will be better for you to enter as an individual\nY= Continue\nN= Return to main menu\n-").lower()
+                            Con = input(colorama.Fore.WHITE+"Are you sure you want to continue, It will be better for you to enter as an individual\nY= Continue\nN= Return to main menu\n-").lower()
                             if Con == "n":
                                 tori = ""
                                 members = 1
@@ -155,15 +157,16 @@ while tori != "t" and tori != "i":
                                 teams += 1
                                 team["id"] = "t"+str(teams)
                                 teamjsonwrite()
-                                print("Successfully entered!")
-                                getpass("Your Teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
+                                print(colorama.Fore.WHITE+"Successfully entered!")
+                                getpass(colorama.Fore.WHITE+"Your Teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
                                 con = ""
                                 while con != "y" and con != "n":
-                                    con = input("Would you like to continue to the Events?\nY = Yes\nN = No\n-").lower()
+                                    con = input(colorama.Fore.WHITE+"Would you like to continue to the Events?\nY = Yes\nN = No\n-").lower()
                                     if con != "y" and con != "n":
-                                        print("Error: Invalid Entry")
+                                        print(colorama.Fore.RED+"Error: Invalid Entry")
                                     else:
                                         if con == "y":
+                                            uninstall()
                                             import Events
                                         else:
                                             quit()
@@ -172,15 +175,16 @@ while tori != "t" and tori != "i":
                         teams += 1
                         team["id"] = "t"+str(teams)
                         teamjsonwrite()
-                        print("Successfully entered!")
-                        getpass("Your Teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
+                        print(colorama.Fore.WHITE+"Successfully entered!")
+                        getpass(colorama.Fore.WHITE+"Your Teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
                         con = ""
                         while con != "y" and con != "n":
-                            con = input("Would you like to continue to the Events?\nY = Yes\nN = No\n-").lower()
+                            con = input(colorama.Fore.WHITE+"Would you like to continue to the Events?\nY = Yes\nN = No\n-").lower()
                             if con != "y" and con != "n":
-                                print("Error: Invalid Entry")
+                                print(colorama.Fore.RED+"Error: Invalid Entry")
                             else:
                                 if con == "y":
+                                    uninstall()
                                     import Events
                                 else:
                                     quit()
@@ -188,15 +192,16 @@ while tori != "t" and tori != "i":
                     teams += 1
                     team["id"] = "t"+str(teams)
                     teamjsonwrite()
-                    print("Successfully entered!")
-                    getpass("Your teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
+                    print(colorama.Fore.WHITE+"Successfully entered!")
+                    getpass(colorama.Fore.WHITE+"Your teams ID is t"+str(teams)+" write it down somewhere as you will need it later, press enter to exit")
                     con = ""
                     while con != "y" and con != "n":
-                        con = input("Would you like to continue to the Events?\nY = Yes\nN = No\n-").lower()
+                        con = input(colorama.Fore.WHITE+"Would you like to continue to the Events?\nY = Yes\nN = No\n-").lower()
                         if con != "y" and con != "n":
-                            print("Error: Invalid Entry")
+                            print(colorama.Fore.RED+"Error: Invalid Entry")
                         else:
                             if con == "y":
+                                uninstall()
                                 import Events
             
                             else:
@@ -210,26 +215,26 @@ while tori != "t" and tori != "i":
     #Individual
     elif(tori == "i"):
         ans = ""
-        print("Enter as  an Individual---------------------------------------------------------------------------------------------")
+        print(colorama.Fore.WHITE+"Enter as  an Individual---------------------------------------------------------------------------------------------")
         if individuals == 20:
-            print("Sorry we already have enough teams, But you can enter as an individual.")
+            print(colorama.Fore.RED+"Sorry we already have enough teams, But you can enter as an individual.")
             tori = ""
         else:
-            ans = input("Input a name\nOr type B to quit to main menu\n-")
+            ans = input(colorama.Fore.WHITE+"Input a name\nOr type B to quit to main menu\n-")
             if ans != "B" and ans != "b":
                 individual["name"] = ans
                 print(individuals)
                 individuals += 1
                 individual["id"] = "i"+str(individuals)
                 indivjsonwrite()
-                print("Successfully entered!")
-                getpass("Your ID is i"+str(individuals)+" write it down somewhere as you will need it later, press enter to exit")
+                print(colorama.Fore.WHITE+"Successfully entered!")
+                getpass(colorama.Fore.WHITE+"Your ID is i"+str(individuals)+" write it down somewhere as you will need it later, press enter to exit")
 
                 con = ""
                 while con != "y" and con != "n":
-                    con = input("Would you like to continue to the Events?\nY = Yes\nN = No\n-").lower()
+                    con = input(colorama.Fore.WHITE+"Would you like to continue to the Events?\nY = Yes\nN = No\n-").lower()
                     if con != "y" and con != "n":
-                        print("Error: Invalid Entry")
+                        print(colorama.Fore.RED+"Error: Invalid Entry")
                     else:
                         if con == "y":
                             import Events
@@ -241,7 +246,7 @@ while tori != "t" and tori != "i":
     elif(tori == "b"):
         quit()
     else:
-        print("Error: Invalid Entry")
+        print(colorama.Fore.RED+"Error: Invalid Entry")
         
 
 
